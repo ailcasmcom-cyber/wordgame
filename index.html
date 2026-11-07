@@ -34,19 +34,36 @@ body{background:linear-gradient(160deg,var(--bg1),var(--bg2));color:#fff;font-fa
 .chip{min-width:70px;text-align:center;padding:5px 12px;border-radius:999px;background:var(--card);font-weight:700}.chip.on{background:var(--ok)}
 #msg{text-align:center;height:22px;font-weight:700}
 #home{position:fixed;inset:0;z-index:20;background:linear-gradient(160deg,var(--bg1),var(--bg2));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:20px;text-align:center}#home.off{display:none}.logo{display:grid;grid-template-columns:repeat(2,76px);gap:10px}.logo i{height:76px;border-radius:18px;background:#fff;box-shadow:0 5px 0 #aab8c8;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:42px;color:var(--ink)}.logo i:nth-child(2),.logo i:nth-child(3){background:var(--gold);box-shadow:0 5px 0 #c28f00;color:#5a3b00}h1{font-size:34px;margin:0}.go{font-size:24px;padding:12px 44px}
-#map{position:fixed;inset:0;background:rgba(6,20,45,.92);display:none;flex-direction:column;align-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) 16px 20px}
+#map{position:fixed;inset:0;background:rgba(6,20,45,.98);display:none;flex-direction:column;align-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) 16px 20px}
 #map.on{display:flex}
 #grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:420px;overflow-y:auto;margin:14px 0}
 .lv{aspect-ratio:1;border-radius:14px;border:0;font:inherit;font-weight:800;font-size:20px;background:var(--btn);color:#fff}
 .lv.cur{background:var(--gold);color:#5a3b00}.lv.lk{background:rgba(255,255,255,.15);color:#8aa}
+.row{flex-wrap:wrap}.row .btn{font-size:14px;padding:8px 10px}
+#side{position:fixed;inset:0;z-index:15;background:rgba(6,20,45,.6);display:none}#side.on{display:block}
+#panel{position:absolute;top:0;bottom:0;right:0;width:min(78%,320px);background:#e6f2ff;color:var(--ink);padding:calc(24px + env(safe-area-inset-top,0px)) 16px 20px;display:flex;flex-direction:column;gap:12px;border-radius:24px 0 0 24px}
+#panel .btn{font-size:18px;padding:14px;width:100%}
+#grid{display:block;flex:1;min-height:0}.lv{position:absolute;width:52px;height:52px;aspect-ratio:auto;border-radius:50%;transform:translateX(-50%);box-shadow:0 4px 0 var(--btn2)}
+.lv.done{background:var(--ok);box-shadow:0 4px 0 #1e8449}.lv.cur{box-shadow:0 0 0 5px rgba(255,200,61,.4),0 4px 0 #c28f00}
+.lv.stn{width:66px;height:66px;font-size:30px;background:#9b59f6;box-shadow:0 4px 0 #6c3bb8}.lv.lk{background:rgba(255,255,255,.18);box-shadow:none}
+a.btn{display:block;text-decoration:none;text-align:center;color:#fff}
+#share{position:fixed;inset:0;z-index:25;background:rgba(6,20,45,.7);display:none;align-items:center;justify-content:center;padding:20px}#share.on{display:flex}
+#shbox{position:relative;background:#e6f2ff;color:var(--ink);border-radius:28px;padding:22px 18px 20px;width:100%;max-width:360px;text-align:center;border:4px solid #fff}
+#shbox h2{margin:0;font-size:24px}#shbox p{margin:2px 0 8px;font-weight:700;opacity:.75}
+#shx{position:absolute;top:10px;left:14px;border:0;background:none;font-size:22px;color:var(--ink)}
+#shbox .logo{grid-template-columns:repeat(2,56px);justify-content:center;margin:10px auto}#shbox .logo i{height:56px;font-size:30px;border-radius:14px}
+.soc{display:flex;justify-content:center;gap:14px;margin-top:14px}
+.c{width:60px;height:60px;border-radius:50%;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font:inherit;font-weight:800;font-size:28px;color:#fff;text-decoration:none;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+.fb{background:#3b5998}.wa{background:#25d366}.ig{background:#d6249f}.mo{background:#9b59f6}
+#shm{min-height:22px;margin-top:12px;font-weight:700;font-size:14px;word-break:break-all}
 </style>
 </head>
 <body>
 <div id="app">
  <div class="top">
-  <button class="btn" id="exit" aria-label="خروج">➜</button>
+  <button class="btn" id="set" aria-label="الإعدادات">⚙️</button>
   <div class="pill" id="lvl">المرحلة 1</div>
-  <div class="pill">🪙 <span id="coins">50</span> <button class="btn gold" id="ad" style="padding:2px 9px">+</button></div>
+  <div class="pill">🪙 <span id="coins">50</span></div>
   <button class="btn" id="mapb">🗺️</button>
  </div>
  <div class="pic" id="pic"></div>
@@ -57,19 +74,21 @@ body{background:linear-gradient(160deg,var(--bg1),var(--bg2));color:#fff;font-fa
  <div class="row"><button class="btn gold" id="hint">💡 تلميح (10)</button><button class="btn" id="clear">🗑️ مسح</button></div>
 </div>
 <div id="home"><div class="logo"><i>خ</i><i>م</i><i>ن</i><i>؟</i></div><h1>خمّن الكلمة بالصورة</h1><button class="btn gold go" id="play">ابدأ اللعب</button></div>
+<div id="share"><div id="shbox"><button id="shx" aria-label="إغلاق">✖</button><h2>انشر اللعبة</h2><p>وتحدَّ أصحابك!</p><div class="logo"><i>خ</i><i>م</i><i>ن</i><i>؟</i></div><div class="soc"><a id="sfb" class="c fb" target="_blank" rel="noopener">f</a><a id="swa" class="c wa" target="_blank" rel="noopener">💬</a><a id="sig" class="c ig" href="https://www.instagram.com/" target="_blank" rel="noopener">📷</a><button id="smo" class="c mo">⋯</button></div><div id="shm"></div></div></div>
+<div id="side"><div id="panel"><h2 style="margin:0 0 4px;text-align:center">الإعدادات</h2><button class="btn" id="snd"></button><button class="btn" id="shr">📤 أرسل اللعبة</button><a class="btn" id="ig" style="display:none" target="_blank" rel="noopener">📷 تابعنا</a><button class="btn gold" id="hm">🏠 الرئيسية</button></div></div>
 <div id="map"><div class="pill" style="font-size:20px">خريطة المراحل</div><div id="grid"></div><button class="btn" id="close">إغلاق</button></div>
 <script>
-const L=[["🌞", ["ضوء", "حرارة", "صيف"]], ["🌙", ["ليل", "نجوم", "ظلام"]], ["🍎", ["فاكهة", "شجرة", "عصير"]], ["🚗", ["طريق", "سائق", "محرك"]], ["✈️", ["سماء", "مطار", "سفر"]], ["🏠", ["باب", "سقف", "عائلة"]], ["📚", ["قراءة", "مدرسة", "قلم"]], ["🌹", ["عطر", "حديقة", "حب"]], ["🐟", ["بحر", "شبكة", "ماء"]], ["🦁", ["غابة", "ملك", "زئير"]], ["🐘", ["خرطوم", "ضخم", "عاج"]], ["⏰", ["وقت", "منبه", "نوم"]], ["🐄", ["حليب", "مزرعة", "عجل"]], ["🐔", ["بيض", "ريش", "ديك"]], ["🐝", ["عسل", "خلية", "لسع"]], ["🌧️", ["مطر", "غيوم", "شتاء"]], ["❄️", ["ثلج", "برد", "جليد"]], ["🔥", ["نار", "حرق", "دخان"]], ["🌳", ["ظل", "غصن", "جذع"]], ["🏖️", ["رمل", "شاطئ", "موج"]], ["⚽", ["كرة", "لاعب", "هدف"]], ["🎂", ["حلوى", "شمعة", "عيد"]], ["🦷", ["سن", "طبيب", "تنظيف"]], ["👁️", ["نظر", "رمش", "عدسة"]], ["🎵", ["لحن", "غناء", "نغمة"]], ["🔑", ["قفل", "سلسلة", "حديد"]], ["💡", ["نور", "كهرباء", "مصباح"]], ["📱", ["اتصال", "شاشة", "رسالة"]], ["🚲", ["عجلة", "سباق", "دواسة"]], ["🚢", ["ميناء", "بحار", "قبطان"]], ["🚂", ["سكة", "محطة", "قاطرة"]], ["🍕", ["عجين", "جبن", "مطعم"]], ["☕", ["قهوة", "فنجان", "بخار"]], ["🍉", ["أحمر", "بذور", "عطش"]], ["🎈", ["هواء", "حفلة", "خيط"]], ["🏰", ["قلعة", "أسوار", "حصن"]], ["🐢", ["بطيء", "درع", "بيضة"]], ["🦅", ["جناح", "صقر", "قمة"]], ["🌋", ["حمم", "رماد", "انفجار"]], ["🌈", ["ألوان", "قوس", "سحر"]], ["🧲", ["جذب", "حديد", "قطب"]], ["🔭", ["فلك", "كواكب", "مراقبة"]], ["🎹", ["عزف", "مفاتيح", "موسيقى"]], ["🧭", ["اتجاه", "رحلة", "كنز"]], ["🏔️", ["تسلق", "ثلوج", "ارتفاع"]], ["🛰️", ["فضاء", "مدار", "إشارة"]], ["🧪", ["مختبر", "تجربة", "كيمياء"]], ["⚖️", ["عدالة", "قاضي", "محكمة"]], ["🏆", ["فوز", "بطولة", "كأس"]], ["🎓", ["تخرج", "جامعة", "شهادة"]]];
+const L=[["🌞", ["ضوء", "حرارة", "صيف"]], ["🌙", ["ليل", "نجوم", "ظلام"]], ["🍎", ["فاكهة", "شجرة", "عصير"]], ["🚗", ["طريق", "سائق", "محرك"]], ["✈️", ["سماء", "مطار", "سفر"]], ["🏠", ["باب", "سقف", "عائلة"]], ["📚", ["قراءة", "مدرسة", "قلم"]], ["🌹", ["عطر", "حديقة", "حب"]], ["🐟", ["بحر", "شبكة", "ماء"]], ["🦁", ["غابة", "ملك", "زئير"]], ["🐘", ["خرطوم", "ضخم", "عاج"]], ["⏰", ["وقت", "منبه", "نوم"]], ["🐄", ["حليب", "مزرعة", "عجل"]], ["🐔", ["بيض", "ريش", "ديك"]], ["🐝", ["عسل", "خلية", "لسع"]], ["🌧️", ["مطر", "غيوم", "شتاء"]], ["❄️", ["ثلج", "برد", "جليد"]], ["🔥", ["نار", "حرق", "دخان"]], ["🌳", ["ظل", "غصن", "جذع"]], ["🏖️", ["رمل", "شاطئ", "موج"]], ["⚽", ["كرة", "لاعب", "هدف"]], ["🎂", ["حلوى", "شمعة", "عيد"]], ["🦷", ["سن", "طبيب", "تنظيف"]], ["👁️", ["نظر", "رمش", "عدسة"]], ["🎵", ["لحن", "غناء", "نغمة"]], ["🔑", ["قفل", "سلسلة", "حديد"]], ["💡", ["نور", "كهرباء", "مصباح"]], ["📱", ["اتصال", "شاشة", "رسالة"]], ["🚲", ["عجلة", "سباق", "دواسة"]], ["🚢", ["ميناء", "بحار", "قبطان"]], ["🚂", ["سكة", "محطة", "قاطرة"]], ["🍕", ["عجين", "جبن", "مطعم"]], ["☕", ["قهوة", "فنجان", "بخار"]], ["🍉", ["أحمر", "بذور", "عطش"]], ["🎈", ["هواء", "حفلة", "خيط"]], ["🏰", ["قلعة", "أسوار", "حصن"]], ["🐢", ["بطيء", "درع", "بيضة"]], ["🦅", ["جناح", "صقر", "قمة"]], ["🌋", ["حمم", "رماد", "انفجار"]], ["🌈", ["ألوان", "قوس", "سحر"]], ["🧲", ["جذب", "حديد", "قطب"]], ["🔭", ["فلك", "كواكب", "مراقبة"]], ["🎹", ["عزف", "مفاتيح", "موسيقى"]], ["🧭", ["اتجاه", "رحلة", "كنز"]], ["🏔️", ["تسلق", "ثلوج", "ارتفاع"]], ["🛰️", ["فضاء", "مدار", "إشارة"]], ["🧪", ["مختبر", "تجربة", "كيمياء"]], ["⚖️", ["عدالة", "قاضي", "محكمة"]], ["🏆", ["فوز", "بطولة", "كأس"]], ["🎓", ["تخرج", "جامعة", "شهادة"]], ["🍇", ["عصير", "كرمة", "زبيب"]], ["🍊", ["قشر", "فيتامين", "حمضيات"]], ["🥕", ["أرنب", "خضار", "برتقالي"]], ["🥖", ["مخبز", "طحين", "خميرة"]], ["🥚", ["قشرة", "فطور", "دجاجة"]], ["🍫", ["كاكاو", "حلوى", "طفولة"]], ["🍦", ["بارد", "قمع", "مثلجات"]], ["🍔", ["شطيرة", "وجبة", "سريعة"]], ["🍞", ["فرن", "قمح", "رغيف"]], ["🥗", ["خس", "طماطم", "صحي"]], ["🐒", ["موز", "غصن", "ذيل"]], ["🐇", ["قفز", "أذن", "فرو"]], ["🐺", ["عواء", "قطيع", "ناب"]], ["🦊", ["مكر", "ذيل", "برية"]], ["🐻", ["سبات", "مخلب", "كهف"]], ["🐼", ["خيزران", "صين", "أبيض"]], ["🐧", ["قطب", "جنوبي", "سباحة"]], ["🐬", ["ذكي", "محيط", "قفز"]], ["🐙", ["أذرع", "حبر", "قاع"]], ["🦀", ["كماشة", "بحري", "صدفة"]], ["🦋", ["أجنحة", "زهرة", "شرنقة"]], ["🕷️", ["نسيج", "ثمانية", "حشرة"]], ["🐍", ["سم", "زحف", "جلد"]], ["🦒", ["رقبة", "طويل", "سافانا"]], ["🦉", ["حكمة", "سهر", "ريش"]], ["🌻", ["دوار", "حقل", "ربيع"]], ["🌵", ["صحراء", "شوك", "جاف"]], ["🍄", ["رطوبة", "قبعة", "غابة"]], ["🌊", ["أزرق", "عميق", "هادر"]], ["🏝️", ["نخلة", "عزلة", "سياحة"]], ["🌅", ["شروق", "أفق", "فجر"]], ["⛈️", ["رعد", "برق", "عاصفة"]], ["🌪️", ["إعصار", "دوامة", "رياح"]], ["🧊", ["مكعب", "تجمد", "مشروب"]], ["⛺", ["تخييم", "مخيم", "ليلة"]], ["🚁", ["مروحية", "إنقاذ", "هبوط"]], ["🚀", ["إطلاق", "رواد", "مركبة"]], ["🚒", ["إطفاء", "حريق", "سلم"]], ["🚑", ["إسعاف", "مريض", "سرعة"]], ["🚓", ["شرطة", "دورية", "قانون"]], ["🛵", ["دراجة", "خوذة", "توصيل"]], ["⛽", ["وقود", "بنزين", "مضخة"]], ["🏥", ["دكتور", "علاج", "طوارئ"]], ["🏫", ["تعليم", "معلم", "طلاب"]], ["🕌", ["صلاة", "مئذنة", "جامع"]], ["🏪", ["بيع", "شراء", "زبون"]], ["🏦", ["مال", "أمان", "حساب"]], ["🌉", ["نهر", "عبور", "معلق"]], ["🎡", ["دولاب", "ملاهي", "دوران"]], ["🥇", ["ذهب", "ميدالية", "بطل"]], ["⌚", ["معصم", "توقيت", "ذكية"]], ["💻", ["حاسوب", "لوحة", "برمجة"]], ["🖨️", ["ورق", "حبر", "نسخة"]], ["📷", ["تصوير", "عدسة", "لقطة"]], ["🎥", ["سينما", "فيلم", "مخرج"]], ["🎤", ["صوت", "مغني", "حفل"]], ["🎸", ["أوتار", "عزف", "روك"]], ["🥁", ["إيقاع", "عصا", "فرقة"]], ["🎨", ["فنان", "ريشة", "رسم"]], ["🧵", ["خياطة", "إبرة", "قماش"]], ["✂️", ["قص", "حلاقة", "شعر"]], ["🔨", ["نجار", "مسمار", "بناء"]], ["🔧", ["مفتاح", "ورشة", "سباك"]], ["🧹", ["تنظيف", "غبار", "أرض"]], ["🛏️", ["وسادة", "غطاء", "راحة"]], ["🚿", ["استحمام", "ماء", "صابون"]], ["🪞", ["انعكاس", "زجاج", "وجه"]], ["🔬", ["تكبير", "بكتيريا", "علم"]], ["🧬", ["جينات", "وراثة", "حمض"]], ["💊", ["دواء", "صيدلية", "شفاء"]], ["🩺", ["فحص", "نبض", "سماعة"]], ["🧠", ["تفكير", "ذكاء", "ذاكرة"]], ["❤️", ["دم", "شريان", "نبضات"]], ["🦴", ["هيكل", "كسر", "كالسيوم"]], ["🌍", ["كوكب", "عالم", "قارات"]], ["🪐", ["زحل", "حلقات", "مجرة"]], ["☄️", ["نيزك", "ذيل", "اصطدام"]], ["🌠", ["شهاب", "أمنية", "سقوط"]], ["🌌", ["كون", "سديم", "لانهاية"]], ["⚡", ["طاقة", "صاعقة", "جهد"]], ["🔋", ["شحن", "تفريغ", "قدرة"]], ["🔌", ["مقبس", "تيار", "سلك"]], ["🔒", ["حماية", "كلمة", "خصوصية"]], ["📜", ["مخطوطة", "تاريخ", "قديمة"]], ["🗿", ["تمثال", "حضارة", "حجر"]], ["🏛️", ["أعمدة", "إغريق", "معبد"]], ["⚓", ["سفينة", "رسو", "ثقيلة"]], ["🗼", ["برج", "باريس", "حديد"]], ["🕋", ["حج", "مكة", "طواف"]], ["🌴", ["تمر", "بلح", "رطب"]], ["🐎", ["فرس", "فروسية", "صهيل"]], ["🦚", ["ريش", "غرور", "جمال"]], ["🦜", ["تقليد", "كلام", "ملون"]], ["🐋", ["أضخم", "محيط", "زعنفة"]], ["🦈", ["افتراس", "أنياب", "خطر"]], ["🐊", ["نهر", "فك", "زواحف"]], ["🦎", ["تلون", "زاحف", "تمويه"]], ["🐜", ["مستعمرة", "عمل", "صغير"]], ["🪔", ["رمضان", "إضاءة", "تراث"]], ["🎖️", ["وسام", "شرف", "تكريم"]]];
 const AR="ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
 let S={lv:0,coins:50,max:0};
 try{Object.assign(S,JSON.parse(localStorage.getItem("wg")||"{}"))}catch(e){}
 const save=()=>{try{localStorage.setItem("wg",JSON.stringify(S))}catch(e){}};
 const $=i=>document.getElementById(i);
-let ans,tiles,slots,lock,busy,wi=0;
-let ac;function beep(f,d=.12){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+let ans,tiles,slots,lock,busy,wi=0,sk=false;
+let ac;function beep(f,d=.12){if(S.mute)return;try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
 function say(t){$("msg").textContent=t}
 function load(){
- busy=false;ans=[...L[S.lv][1][wi]];say("");
+ busy=false;sk=false;ans=[...L[S.lv][1][wi]];say("");
  let pool=[...ans];const extra=[...AR].filter(c=>!ans.includes(c)).sort(()=>Math.random()-.5);
  const tot=Math.min(16,ans.length+2+Math.floor(S.lv*.3));while(pool.length<tot)pool.push(extra.pop());
  tiles=pool.sort(()=>Math.random()-.5);slots=ans.map(()=>null);lock=ans.map(()=>false);
@@ -85,8 +104,8 @@ function draw(){
 function check(){
  if(slots.some(t=>t===null))return;
  if(slots.every((t,i)=>tiles[t]===ans[i])){
-  busy=true;S.coins+=5;save();
-  $("slots").classList.add("good");say("أحسنت! +5 🪙");beep(660);setTimeout(()=>beep(880),120);
+  busy=true;if(!sk)S.coins+=5;save();
+  $("slots").classList.add("good");say(sk?"تم التخطي":"أحسنت! +5 🪙");beep(660);setTimeout(()=>beep(880),120);
   setTimeout(()=>{if(wi<2){wi++}else{wi=0;S.coins+=10;S.lv=(S.lv+1)%L.length;if(S.lv>S.max)S.max=S.lv}save();load()},1000);
  }else{
   busy=true;$("slots").classList.add("shake");say("إجابة خاطئة، حاول مجدداً");beep(180,.25);
@@ -98,17 +117,37 @@ $("slots").onclick=e=>{const b=e.target.closest(".slot");if(!b||busy)return;cons
 $("clear").onclick=()=>{if(busy)return;slots=slots.map((t,i)=>lock[i]?t:null);draw()};
 $("hint").onclick=()=>{
  if(busy)return;const i=lock.indexOf(false);if(i<0)return;
- if(S.coins<10){say("لا تكفي العملات، شاهد إعلاناً");return}
+ if(S.coins<10){say("لا تكفي العملات، أكمل مراحل لتكسب المزيد");return}
  const t=tiles.findIndex((c,k)=>c===ans[i]&&!slots.some((s,j)=>s===k&&lock[j]));
  slots=slots.map(s=>s===t?null:s);slots[i]=t;lock[i]=true;S.coins-=10;save();draw();check();
 };
-$("ad").onclick=()=>{S.coins+=20;save();say("حصلت على 20 عملة مجانية 🎁");draw()};
 function openMap(){
- $("grid").innerHTML=L.map((_,i)=>`<button class="lv ${i===S.lv?"cur":""} ${i>S.max?"lk":""}" data-l="${i}">${i>S.max?"🔒":i+1}</button>`).join("");
  $("map").classList.add("on");
+ const g=$("grid"),n=L.length,H=86,W=g.clientWidth||340,T=n*H+70;
+ const P=i=>[W/2+Math.sin(i*.9)*W*.3,T-80-i*H];
+ let d="";L.forEach((_,i)=>{const[x,y]=P(i);d+=(i?"L":"M")+x+" "+(y+26)});
+ g.innerHTML=`<div style="position:relative;height:${T}px"><svg width="${W}" height="${T}" style="position:absolute;inset:0"><path d="${d}" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="6" stroke-dasharray="2 12" stroke-linecap="round"/></svg>`+L.map((_,i)=>{const[x,y]=P(i),st=i>S.max?"lk":i===S.lv?"cur":i<S.max?"done":"",stn=(i+1)%50===0;return `<button class="lv ${st} ${stn?"stn":""}" data-l="${i}" style="left:${x}px;top:${y}px">${i>S.max?"🔒":stn?"🏁":i+1}</button>`}).join("")+"</div>";
+ g.scrollTop=P(S.lv)[1]-g.clientHeight/2;
 }
-$("mapb").onclick=openMap;$("exit").onclick=openMap;$("close").onclick=()=>$("map").classList.remove("on");
+$("mapb").onclick=openMap;$("close").onclick=()=>$("map").classList.remove("on");
 $("grid").onclick=e=>{const b=e.target.closest(".lv");if(!b)return;const i=+b.dataset.l;if(i>S.max)return;S.lv=i;wi=0;save();$("map").classList.remove("on");load()};
+const IG="so5e5o";
+$("set").onclick=()=>$("side").classList.add("on");
+$("side").onclick=e=>{if(e.target.id==="side")$("side").classList.remove("on")};
+function snd(){$("snd").textContent=S.mute?"🔇 الصوت: مكتوم":"🔊 الصوت: يعمل"}
+$("snd").onclick=()=>{S.mute=!S.mute;save();snd()};snd();
+const SHARE="https://ailcasmcom-cyber.github.io/wordgame/",TXT="جرّب لعبة خمّن الكلمة بالصورة! 🧩";
+const sm=t=>{$("shm").textContent=t};
+async function cp(){try{await navigator.clipboard.writeText(SHARE);return true}catch(e){return false}}
+$("shr").onclick=()=>{$("side").classList.remove("on");sm("");$("share").classList.add("on")};
+$("shx").onclick=()=>$("share").classList.remove("on");
+$("share").onclick=e=>{if(e.target.id==="share")$("share").classList.remove("on")};
+$("sfb").href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent(SHARE);
+$("swa").href="https://wa.me/?text="+encodeURIComponent(TXT+" "+SHARE);
+$("sig").onclick=async()=>{sm((await cp())?"تم نسخ الرابط، الصقه في إنستغرام":SHARE)};
+$("smo").onclick=async()=>{try{await navigator.share({title:"خمّن الكلمة بالصورة",text:TXT,url:SHARE});return}catch(e){if(e&&e.name==="AbortError")return}sm((await cp())?"تم نسخ الرابط":SHARE)};
+if(IG){const a=$("ig");a.style.display="block";a.href="https://instagram.com/"+IG}
+$("hm").onclick=()=>{$("side").classList.remove("on");$("home").classList.remove("off")};
 if(S.lv>S.max)S.max=S.lv;load();
 $("play").onclick=()=>{$("home").classList.add("off");beep(520)};
 if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
