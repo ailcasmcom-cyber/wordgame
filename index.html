@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b2a55"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>خمّن الكلمة بالصورة</title>
+<style>
+:root{--bg1:#0b2a55;--bg2:#0e8c9a;--tile:#fff;--ink:#0b2a55;--gold:#ffc83d;--btn:#1fb6c4;--btn2:#0f7f8c;--ok:#2ecc71;--bad:#ff5d5d;--card:rgba(255,255,255,.14);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:linear-gradient(160deg,var(--bg1),var(--bg2));color:#fff;font-family:"Cairo","Noto Naskh Arabic",Tahoma,sans-serif;display:flex;justify-content:center;overflow:hidden}
+#app{width:100%;max-width:480px;height:100%;display:flex;flex-direction:column;padding:10px 14px 14px;gap:10px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pill{background:var(--card);border-radius:999px;padding:6px 14px;font-weight:700;font-size:16px;display:flex;align-items:center;gap:6px}
+.btn{border:0;color:#fff;font:inherit;font-weight:700;background:var(--btn);border-radius:14px;padding:8px 12px;box-shadow:0 4px 0 var(--btn2);cursor:pointer;transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--btn2)}
+.btn.gold{background:var(--gold);color:#5a3b00;box-shadow:0 4px 0 #c28f00}
+.btn:disabled{opacity:.5}
+.pic{flex:1;min-height:0;background:var(--card);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:min(34vh,150px);box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)}
+.slots,.keys{display:grid;gap:8px;justify-content:center}
+.slots{grid-auto-flow:column}
+.slot,.key{width:44px;height:48px;border-radius:12px;background:var(--tile);color:var(--ink);font:inherit;font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center;border:0}
+.slot{background:rgba(255,255,255,.22);color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+.slot.f{background:var(--tile);color:var(--ink)}
+.slot.lock{background:var(--gold);color:#5a3b00}
+.keys{grid-template-columns:repeat(4,56px);gap:10px}
+.key{width:56px;height:56px;box-shadow:0 4px 0 #aab8c8;cursor:pointer}
+.key:active{transform:translateY(3px);box-shadow:none}
+.key.used{visibility:hidden}
+.row{display:flex;gap:8px;justify-content:center}
+.shake{animation:sh .35s}.good .slot{background:var(--ok);color:#fff}
+@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.chip{min-width:70px;text-align:center;padding:5px 12px;border-radius:999px;background:var(--card);font-weight:700}.chip.on{background:var(--ok)}
+#msg{text-align:center;height:22px;font-weight:700}
+#home{position:fixed;inset:0;z-index:20;background:linear-gradient(160deg,var(--bg1),var(--bg2));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:20px;text-align:center}#home.off{display:none}.logo{display:grid;grid-template-columns:repeat(2,76px);gap:10px}.logo i{height:76px;border-radius:18px;background:#fff;box-shadow:0 5px 0 #aab8c8;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;font-size:42px;color:var(--ink)}.logo i:nth-child(2),.logo i:nth-child(3){background:var(--gold);box-shadow:0 5px 0 #c28f00;color:#5a3b00}h1{font-size:34px;margin:0}.go{font-size:24px;padding:12px 44px}
+#map{position:fixed;inset:0;background:rgba(6,20,45,.92);display:none;flex-direction:column;align-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) 16px 20px}
+#map.on{display:flex}
+#grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:420px;overflow-y:auto;margin:14px 0}
+.lv{aspect-ratio:1;border-radius:14px;border:0;font:inherit;font-weight:800;font-size:20px;background:var(--btn);color:#fff}
+.lv.cur{background:var(--gold);color:#5a3b00}.lv.lk{background:rgba(255,255,255,.15);color:#8aa}
+</style>
+</head>
+<body>
+<div id="app">
+ <div class="top">
+  <button class="btn" id="exit" aria-label="خروج">➜</button>
+  <div class="pill" id="lvl">المرحلة 1</div>
+  <div class="pill">🪙 <span id="coins">50</span> <button class="btn gold" id="ad" style="padding:2px 9px">+</button></div>
+  <button class="btn" id="mapb">🗺️</button>
+ </div>
+ <div class="pic" id="pic"></div>
+ <div class="row" id="found"></div>
+ <div id="msg"></div>
+ <div class="slots" id="slots"></div>
+ <div class="keys" id="keys"></div>
+ <div class="row"><button class="btn gold" id="hint">💡 تلميح (10)</button><button class="btn" id="clear">🗑️ مسح</button></div>
+</div>
+<div id="home"><div class="logo"><i>خ</i><i>م</i><i>ن</i><i>؟</i></div><h1>خمّن الكلمة بالصورة</h1><button class="btn gold go" id="play">ابدأ اللعب</button></div>
+<div id="map"><div class="pill" style="font-size:20px">خريطة المراحل</div><div id="grid"></div><button class="btn" id="close">إغلاق</button></div>
+<script>
+const L=[["🌞", ["ضوء", "حرارة", "صيف"]], ["🌙", ["ليل", "نجوم", "ظلام"]], ["🍎", ["فاكهة", "شجرة", "عصير"]], ["🚗", ["طريق", "سائق", "محرك"]], ["✈️", ["سماء", "مطار", "سفر"]], ["🏠", ["باب", "سقف", "عائلة"]], ["📚", ["قراءة", "مدرسة", "قلم"]], ["🌹", ["عطر", "حديقة", "حب"]], ["🐟", ["بحر", "شبكة", "ماء"]], ["🦁", ["غابة", "ملك", "زئير"]], ["🐘", ["خرطوم", "ضخم", "عاج"]], ["⏰", ["وقت", "منبه", "نوم"]], ["🐄", ["حليب", "مزرعة", "عجل"]], ["🐔", ["بيض", "ريش", "ديك"]], ["🐝", ["عسل", "خلية", "لسع"]], ["🌧️", ["مطر", "غيوم", "شتاء"]], ["❄️", ["ثلج", "برد", "جليد"]], ["🔥", ["نار", "حرق", "دخان"]], ["🌳", ["ظل", "غصن", "جذع"]], ["🏖️", ["رمل", "شاطئ", "موج"]], ["⚽", ["كرة", "لاعب", "هدف"]], ["🎂", ["حلوى", "شمعة", "عيد"]], ["🦷", ["سن", "طبيب", "تنظيف"]], ["👁️", ["نظر", "رمش", "عدسة"]], ["🎵", ["لحن", "غناء", "نغمة"]], ["🔑", ["قفل", "سلسلة", "حديد"]], ["💡", ["نور", "كهرباء", "مصباح"]], ["📱", ["اتصال", "شاشة", "رسالة"]], ["🚲", ["عجلة", "سباق", "دواسة"]], ["🚢", ["ميناء", "بحار", "قبطان"]], ["🚂", ["سكة", "محطة", "قاطرة"]], ["🍕", ["عجين", "جبن", "مطعم"]], ["☕", ["قهوة", "فنجان", "بخار"]], ["🍉", ["أحمر", "بذور", "عطش"]], ["🎈", ["هواء", "حفلة", "خيط"]], ["🏰", ["قلعة", "أسوار", "حصن"]], ["🐢", ["بطيء", "درع", "بيضة"]], ["🦅", ["جناح", "صقر", "قمة"]], ["🌋", ["حمم", "رماد", "انفجار"]], ["🌈", ["ألوان", "قوس", "سحر"]], ["🧲", ["جذب", "حديد", "قطب"]], ["🔭", ["فلك", "كواكب", "مراقبة"]], ["🎹", ["عزف", "مفاتيح", "موسيقى"]], ["🧭", ["اتجاه", "رحلة", "كنز"]], ["🏔️", ["تسلق", "ثلوج", "ارتفاع"]], ["🛰️", ["فضاء", "مدار", "إشارة"]], ["🧪", ["مختبر", "تجربة", "كيمياء"]], ["⚖️", ["عدالة", "قاضي", "محكمة"]], ["🏆", ["فوز", "بطولة", "كأس"]], ["🎓", ["تخرج", "جامعة", "شهادة"]]];
+const AR="ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
+let S={lv:0,coins:50,max:0};
+try{Object.assign(S,JSON.parse(localStorage.getItem("wg")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem("wg",JSON.stringify(S))}catch(e){}};
+const $=i=>document.getElementById(i);
+let ans,tiles,slots,lock,busy,wi=0;
+let ac;function beep(f,d=.12){try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+function say(t){$("msg").textContent=t}
+function load(){
+ busy=false;ans=[...L[S.lv][1][wi]];say("");
+ let pool=[...ans];const extra=[...AR].filter(c=>!ans.includes(c)).sort(()=>Math.random()-.5);
+ const tot=Math.min(16,ans.length+2+Math.floor(S.lv*.3));while(pool.length<tot)pool.push(extra.pop());
+ tiles=pool.sort(()=>Math.random()-.5);slots=ans.map(()=>null);lock=ans.map(()=>false);
+ $("pic").textContent=L[S.lv][0];$("lvl").textContent="المرحلة "+(S.lv+1)+" · كلمة "+(wi+1)+"/3";draw();
+}
+function draw(){
+ $("coins").textContent=S.coins;
+ $("found").innerHTML=L[S.lv][1].map((w,k)=>`<span class="chip ${k<wi?"on":""}">${k<wi?w:"؟"}</span>`).join("");
+ $("slots").className="slots";
+ $("slots").innerHTML=slots.map((t,i)=>`<button class="slot ${t!==null?"f":""} ${lock[i]?"lock":""}" data-i="${i}">${t!==null?tiles[t]:""}</button>`).join("");
+ $("keys").innerHTML=tiles.map((c,i)=>`<button class="key ${slots.includes(i)?"used":""}" data-t="${i}">${c}</button>`).join("");
+}
+function check(){
+ if(slots.some(t=>t===null))return;
+ if(slots.every((t,i)=>tiles[t]===ans[i])){
+  busy=true;S.coins+=5;save();
+  $("slots").classList.add("good");say("أحسنت! +5 🪙");beep(660);setTimeout(()=>beep(880),120);
+  setTimeout(()=>{if(wi<2){wi++}else{wi=0;S.coins+=10;S.lv=(S.lv+1)%L.length;if(S.lv>S.max)S.max=S.lv}save();load()},1000);
+ }else{
+  busy=true;$("slots").classList.add("shake");say("إجابة خاطئة، حاول مجدداً");beep(180,.25);
+  setTimeout(()=>{slots=slots.map((t,i)=>lock[i]?t:null);busy=false;say("");draw()},600);
+ }
+}
+$("keys").onclick=e=>{const b=e.target.closest(".key");if(!b||busy)return;const i=slots.indexOf(null);if(i<0)return;slots[i]=+b.dataset.t;beep(440,.05);draw();check()};
+$("slots").onclick=e=>{const b=e.target.closest(".slot");if(!b||busy)return;const i=+b.dataset.i;if(lock[i])return;slots[i]=null;draw()};
+$("clear").onclick=()=>{if(busy)return;slots=slots.map((t,i)=>lock[i]?t:null);draw()};
+$("hint").onclick=()=>{
+ if(busy)return;const i=lock.indexOf(false);if(i<0)return;
+ if(S.coins<10){say("لا تكفي العملات، شاهد إعلاناً");return}
+ const t=tiles.findIndex((c,k)=>c===ans[i]&&!slots.some((s,j)=>s===k&&lock[j]));
+ slots=slots.map(s=>s===t?null:s);slots[i]=t;lock[i]=true;S.coins-=10;save();draw();check();
+};
+$("ad").onclick=()=>{S.coins+=20;save();say("حصلت على 20 عملة مجانية 🎁");draw()};
+function openMap(){
+ $("grid").innerHTML=L.map((_,i)=>`<button class="lv ${i===S.lv?"cur":""} ${i>S.max?"lk":""}" data-l="${i}">${i>S.max?"🔒":i+1}</button>`).join("");
+ $("map").classList.add("on");
+}
+$("mapb").onclick=openMap;$("exit").onclick=openMap;$("close").onclick=()=>$("map").classList.remove("on");
+$("grid").onclick=e=>{const b=e.target.closest(".lv");if(!b)return;const i=+b.dataset.l;if(i>S.max)return;S.lv=i;wi=0;save();$("map").classList.remove("on");load()};
+if(S.lv>S.max)S.max=S.lv;load();
+$("play").onclick=()=>{$("home").classList.add("off");beep(520)};
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
