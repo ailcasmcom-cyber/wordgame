@@ -57,6 +57,7 @@ a.btn{display:block;text-decoration:none;text-align:center;color:#fff}
 .fb{background:#3b5998}.wa{background:#25d366}.ig{background:#d6249f}.mo{background:#9b59f6}
 #shm{min-height:22px;margin-top:12px;font-weight:700;font-size:14px;word-break:break-all}
 #ver{margin-top:auto;text-align:center;font-size:13px;font-weight:700;opacity:.6}
+#accs{text-align:center;font-size:13px;font-weight:700;opacity:.75;margin-top:-6px}
 </style>
 </head>
 <body>
@@ -76,14 +77,17 @@ a.btn{display:block;text-decoration:none;text-align:center;color:#fff}
 </div>
 <div id="home"><div class="logo"><i>خ</i><i>م</i><i>ن</i><i>؟</i></div><h1>خمّن الكلمة بالصورة</h1><button class="btn gold go" id="play">ابدأ اللعب</button></div>
 <div id="share"><div id="shbox"><button id="shx" aria-label="إغلاق">✖</button><h2>انشر اللعبة</h2><p>وتحدَّ أصحابك!</p><div class="logo"><i>خ</i><i>م</i><i>ن</i><i>؟</i></div><div class="soc"><a id="sfb" class="c fb" target="_blank" rel="noopener">f</a><a id="swa" class="c wa" target="_blank" rel="noopener">💬</a><a id="sig" class="c ig" href="https://www.instagram.com/" target="_blank" rel="noopener">📷</a><button id="smo" class="c mo">⋯</button></div><div id="shm"></div></div></div>
-<div id="side"><div id="panel"><h2 style="margin:0 0 4px;text-align:center">الإعدادات</h2><button class="btn" id="snd"></button><button class="btn" id="shr">📤 أرسل اللعبة</button><a class="btn" id="ig" style="display:none" target="_blank" rel="noopener">📷 تابعنا</a><button class="btn gold" id="hm">🏠 الرئيسية</button><div id="ver">الإصدار 1.5</div></div></div>
+<div id="side"><div id="panel"><h2 style="margin:0 0 4px;text-align:center">الإعدادات</h2><button class="btn" id="gs"></button><div id="accs"></div><button class="btn" id="snd"></button><button class="btn" id="shr">📤 أرسل اللعبة</button><a class="btn" id="ig" style="display:none" target="_blank" rel="noopener">📷 تابعنا</a><button class="btn gold" id="hm">🏠 الرئيسية</button><div id="ver">الإصدار 1.6</div></div></div>
 <div id="map"><div class="pill" style="font-size:20px">خريطة المراحل</div><div id="grid"></div><button class="btn" id="close">إغلاق</button></div>
 <script>
 const L=[["🌞", ["ضوء", "حرارة", "صيف"]], ["🌙", ["ليل", "نجوم", "ظلام"]], ["🍎", ["فاكهة", "شجرة", "عصير"]], ["🚗", ["طريق", "سائق", "محرك"]], ["✈️", ["سماء", "مطار", "سفر"]], ["🏠", ["باب", "سقف", "عائلة"]], ["📚", ["قراءة", "مدرسة", "قلم"]], ["🌹", ["عطر", "حديقة", "حب"]], ["🐟", ["بحر", "شبكة", "ماء"]], ["🦁", ["غابة", "ملك", "زئير"]], ["🐘", ["خرطوم", "ضخم", "عاج"]], ["⏰", ["وقت", "منبه", "نوم"]], ["🐄", ["حليب", "مزرعة", "عجل"]], ["🐔", ["بيض", "ريش", "ديك"]], ["🐝", ["عسل", "خلية", "لسع"]], ["🌧️", ["مطر", "غيوم", "شتاء"]], ["❄️", ["ثلج", "برد", "جليد"]], ["🔥", ["نار", "حرق", "دخان"]], ["🌳", ["ظل", "غصن", "جذع"]], ["🏖️", ["رمل", "شاطئ", "موج"]], ["⚽", ["كرة", "لاعب", "هدف"]], ["🎂", ["حلوى", "شمعة", "عيد"]], ["🦷", ["سن", "طبيب", "تنظيف"]], ["👁️", ["نظر", "رمش", "عدسة"]], ["🎵", ["لحن", "غناء", "نغمة"]], ["🔑", ["قفل", "باب", "خزنة"]], ["💡", ["نور", "كهرباء", "مصباح"]], ["📱", ["اتصال", "شاشة", "رسالة"]], ["🚲", ["عجلة", "سباق", "دواسة"]], ["🚢", ["ميناء", "بحار", "قبطان"]], ["🚂", ["محطة", "ركاب", "سكة"]], ["🍕", ["عجين", "جبن", "مطعم"]], ["☕", ["قهوة", "فنجان", "بخار"]], ["🍉", ["أحمر", "بذور", "عطش"]], ["🎈", ["هواء", "حفلة", "خيط"]], ["🏰", ["ملك", "قلعة", "فارس"]], ["🐢", ["بطيء", "درع", "بيضة"]], ["🦅", ["جناح", "صقر", "قمة"]], ["🌋", ["جبل", "رماد", "انفجار"]], ["🌈", ["ألوان", "قوس", "سبعة"]], ["🧲", ["جذب", "حديد", "قطب"]], ["🔭", ["فلك", "كواكب", "مرصد"]], ["🎹", ["عزف", "مفاتيح", "موسيقى"]], ["🧭", ["اتجاه", "شمال", "خريطة"]], ["🏔️", ["تسلق", "ثلوج", "صخور"]], ["🛰️", ["فضاء", "مدار", "أرض"]], ["🧪", ["مختبر", "تجربة", "كيمياء"]], ["⚖️", ["عدالة", "قاضي", "محكمة"]], ["🏆", ["فوز", "بطولة", "كأس"]], ["🎓", ["تخرج", "جامعة", "شهادة"]], ["🍇", ["عصير", "زبيب", "عنقود"]], ["🍊", ["قشر", "فيتامين", "حامض"]], ["🥕", ["أرنب", "خضار", "برتقالي"]], ["🥖", ["مخبز", "طحين", "خميرة"]], ["🥚", ["قشرة", "فطور", "دجاجة"]], ["🍫", ["كاكاو", "حلوى", "بني"]], ["🍦", ["بارد", "قمع", "مثلجات"]], ["🍔", ["شطيرة", "وجبة", "سريعة"]], ["🍞", ["فرن", "قمح", "رغيف"]], ["🥗", ["خس", "طماطم", "خيار"]], ["🐒", ["موز", "غصن", "ذيل"]], ["🐇", ["قفز", "أذن", "جزر"]], ["🐺", ["عواء", "قطيع", "ناب"]], ["🦊", ["مكر", "ذيل", "حيلة"]], ["🐻", ["سبات", "مخلب", "كهف"]], ["🐼", ["خيزران", "صين", "أبيض"]], ["🐧", ["قطب", "جليد", "سباحة"]], ["🐬", ["ذكي", "محيط", "قفز"]], ["🐙", ["أذرع", "حبر", "قاع"]], ["🦀", ["كماشة", "صدفة", "جانبي"]], ["🦋", ["أجنحة", "زهرة", "رحيق"]], ["🕷️", ["خيوط", "أرجل", "فريسة"]], ["🐍", ["سم", "زحف", "لدغ"]], ["🦒", ["رقبة", "طويل", "سافانا"]], ["🦉", ["حكمة", "سهر", "عيون"]], ["🌻", ["أصفر", "حقل", "زيت"]], ["🌵", ["صحراء", "شوك", "جاف"]], ["🍄", ["قبعة", "غابة", "سام"]], ["🌊", ["أمواج", "أزرق", "عميق"]], ["🏝️", ["نخلة", "رمال", "عطلة"]], ["🌅", ["شروق", "أفق", "فجر"]], ["⛈️", ["رعد", "برق", "عاصفة"]], ["🌪️", ["إعصار", "دوامة", "رياح"]], ["🧊", ["مكعب", "تجمد", "ثلاجة"]], ["⛺", ["تخييم", "رحلة", "جبل"]], ["🚁", ["إنقاذ", "هبوط", "مروحة"]], ["🚀", ["إطلاق", "رواد", "مركبة"]], ["🚒", ["إطفاء", "حريق", "سلم"]], ["🚑", ["إسعاف", "مريض", "سرعة"]], ["🚓", ["شرطة", "دورية", "قانون"]], ["🛵", ["دراجة", "خوذة", "توصيل"]], ["⛽", ["وقود", "بنزين", "مضخة"]], ["🏥", ["دكتور", "علاج", "طوارئ"]], ["🏫", ["تعليم", "معلم", "طلاب"]], ["🕌", ["صلاة", "مئذنة", "جامع"]], ["🏪", ["بيع", "شراء", "زبون"]], ["🏦", ["مال", "حساب", "صراف"]], ["🌉", ["نهر", "عبور", "معلق"]], ["🎡", ["دولاب", "ملاهي", "دوران"]], ["🥇", ["ذهب", "ميدالية", "بطل"]], ["⌚", ["ذكية", "توقيت", "سوار"]], ["💻", ["حاسوب", "لوحة", "برمجة"]], ["🖨️", ["ورق", "حبر", "نسخة"]], ["📷", ["تصوير", "عدسة", "لقطة"]], ["🎥", ["سينما", "فيلم", "مخرج"]], ["🎤", ["صوت", "مغني", "حفل"]], ["🎸", ["أوتار", "عزف", "فرقة"]], ["🥁", ["إيقاع", "عصا", "ضرب"]], ["🎨", ["فنان", "ريشة", "رسم"]], ["🧵", ["خياطة", "إبرة", "قماش"]], ["✂️", ["قصة", "حلاقة", "شعر"]], ["🔨", ["نجار", "مسمار", "بناء"]], ["🔧", ["مفتاح", "ورشة", "سباك"]], ["🧹", ["تنظيف", "غبار", "كنس"]], ["🛏️", ["وسادة", "غطاء", "غرفة"]], ["🚿", ["استحمام", "ماء", "صابون"]], ["🪞", ["انعكاس", "زجاج", "وجه"]], ["🔬", ["تكبير", "عينة", "جراثيم"]], ["🧬", ["جينات", "وراثة", "خلية"]], ["💊", ["دواء", "صيدلية", "شفاء"]], ["🩺", ["فحص", "نبض", "سماعة"]], ["🧠", ["تفكير", "ذكاء", "ذاكرة"]], ["❤️", ["شريان", "عاطفة", "شعور"]], ["🦴", ["هيكل", "كسر", "جمجمة"]], ["🌍", ["كوكب", "عالم", "قارات"]], ["🪐", ["زحل", "حلقات", "مجرة"]], ["☄️", ["نيزك", "صخرة", "اصطدام"]], ["🌠", ["شهاب", "أمنية", "سقوط"]], ["🌌", ["كون", "مجرات", "اتساع"]], ["⚡", ["طاقة", "صاعقة", "كهرباء"]], ["🔋", ["شحن", "هاتف", "سريع"]], ["🔌", ["مقبس", "تيار", "سلك"]], ["🔒", ["حماية", "مغلق", "سر"]], ["📜", ["لفافة", "تاريخ", "كتابة"]], ["🗿", ["حجر", "حضارة", "منحوت"]], ["🏛️", ["أعمدة", "إغريق", "معبد"]], ["⚓", ["سفينة", "رسو", "ثقيلة"]], ["🗼", ["برج", "باريس", "حديد"]], ["🕋", ["حجاج", "مكة", "طواف"]], ["🌴", ["تمر", "نخيل", "جريد"]], ["🐎", ["فرس", "صهيل", "سرج"]], ["🦚", ["ريش", "جمال", "استعراض"]], ["🦜", ["تقليد", "كلام", "ملون"]], ["🐋", ["محيط", "زعنفة", "نافورة"]], ["🦈", ["أنياب", "افتراس", "خطر"]], ["🐊", ["نهر", "مفترس", "زواحف"]], ["🦎", ["جدار", "زاحف", "ذيل"]], ["🐜", ["مستعمرة", "صغير", "سكر"]], ["🪔", ["رمضان", "شمعة", "نور"]], ["🎖️", ["وسام", "شرف", "جندي"]]];
 const AR="ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
 let S={lv:0,coins:50,max:0};
 try{Object.assign(S,JSON.parse(localStorage.getItem("wg")||"{}"))}catch(e){}
-const save=()=>{try{localStorage.setItem("wg",JSON.stringify(S))}catch(e){}};
+let U=null,db=null,auth=null,fbOK=true,pt;
+const saveLocal=()=>{try{localStorage.setItem("wg",JSON.stringify(S))}catch(e){}};
+const push=()=>{if(!U||!db)return;clearTimeout(pt);pt=setTimeout(()=>{db.collection("users").doc(U.uid).set({lv:S.lv,max:S.max,coins:S.coins,mute:!!S.mute,t:S.t||Date.now()},{merge:true}).catch(()=>{})},1200)};
+const save=()=>{S.t=Date.now();saveLocal();push()};
 const $=i=>document.getElementById(i);
 let ans,tiles,slots,lock,busy,wi=0,sk=false;
 let ac;function beep(f,d=.12){if(S.mute)return;try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
@@ -132,6 +136,44 @@ function openMap(){
 }
 $("mapb").onclick=openMap;$("close").onclick=()=>$("map").classList.remove("on");
 $("grid").onclick=e=>{const b=e.target.closest(".lv");if(!b)return;const i=+b.dataset.l;if(i>S.max)return;S.lv=i;wi=0;save();$("map").classList.remove("on");load()};
+const CFG={apiKey:"AIzaSyAgBitop1L1grOpfktPn5WITYYRqlCRKFE",authDomain:"wordgame-ced25.firebaseapp.com",projectId:"wordgame-ced25",storageBucket:"wordgame-ced25.firebasestorage.app",messagingSenderId:"267773687128",appId:"1:267773687128:web:a5d2e66ecc31b2cc8f612d"};
+const sa=t=>{$("accs").textContent=t};
+function upAcc(){
+ const b=$("gs");
+ if(!fbOK){b.textContent="🔐 دخول بحساب جوجل";sa("غير متاح هنا، افتح اللعبة من الرابط الأساسي");return}
+ if(U){b.textContent="👤 "+(U.displayName||"حسابي").split(" ")[0]+" · خروج";sa("تقدمك محفوظ في حسابك ✅")}
+ else{b.textContent="🔐 دخول بحساب جوجل";sa("سجّل دخولك لحفظ تقدمك")}
+}
+const loadScript=u=>new Promise((r,j)=>{const e=document.createElement("script");e.src=u;e.onload=r;e.onerror=j;document.head.appendChild(e)});
+async function pull(){
+ try{
+  const d=await db.collection("users").doc(U.uid).get();
+  if(d.exists){
+   const c=d.data(),better=(c.max>S.max)||(c.max===S.max&&(c.t||0)>(S.t||0));
+   if(better){S.lv=c.lv;S.max=c.max;S.coins=c.coins;S.mute=!!c.mute;S.t=c.t||0;wi=0;saveLocal();load();snd()}
+   else push();
+  }else push();
+ }catch(e){}
+}
+async function initFB(){
+ if(!/^https?:/.test(location.protocol)){fbOK=false;upAcc();return}
+ try{
+  const B="https://www.gstatic.com/firebasejs/10.12.2/";
+  await loadScript(B+"firebase-app-compat.js");await loadScript(B+"firebase-auth-compat.js");await loadScript(B+"firebase-firestore-compat.js");
+  firebase.initializeApp(CFG);auth=firebase.auth();db=firebase.firestore();
+  auth.onAuthStateChanged(async u=>{U=u;upAcc();if(u)await pull()});
+ }catch(e){fbOK=false;upAcc()}
+}
+$("gs").onclick=async()=>{
+ if(!fbOK||!auth){sa("تسجيل الدخول غير متاح الآن");return}
+ if(U){try{await auth.signOut()}catch(e){}return}
+ const p=new firebase.auth.GoogleAuthProvider();
+ try{await auth.signInWithPopup(p)}
+ catch(e){
+  if(e.code==="auth/popup-blocked"||e.code==="auth/operation-not-supported-in-this-environment"){try{await auth.signInWithRedirect(p)}catch(_){sa("تعذّر تسجيل الدخول")}}
+  else if(e.code!=="auth/popup-closed-by-user"&&e.code!=="auth/cancelled-popup-request")sa("تعذّر تسجيل الدخول: "+(e.code||""));
+ }
+};
 const IG="so5e5o";
 $("set").onclick=()=>$("side").classList.add("on");
 $("side").onclick=e=>{if(e.target.id==="side")$("side").classList.remove("on")};
@@ -149,7 +191,7 @@ $("sig").onclick=async()=>{sm((await cp())?"تم نسخ الرابط، الصق�
 $("smo").onclick=async()=>{try{await navigator.share({title:"خمّن الكلمة بالصورة",text:TXT,url:SHARE});return}catch(e){if(e&&e.name==="AbortError")return}sm((await cp())?"تم نسخ الرابط":SHARE)};
 if(IG){const a=$("ig");a.style.display="block";a.href="https://instagram.com/"+IG}
 $("hm").onclick=()=>{$("side").classList.remove("on");$("home").classList.remove("off")};
-if(S.lv>S.max)S.max=S.lv;load();
+if(S.lv>S.max)S.max=S.lv;load();upAcc();initFB();
 $("play").onclick=()=>{$("home").classList.add("off");beep(520)};
 if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script>
