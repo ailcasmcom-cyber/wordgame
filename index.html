@@ -104,16 +104,16 @@ a.btn{display:block;text-decoration:none;text-align:center;color:#fff}
  <div id="msg"></div>
  <div class="slots" id="slots"></div>
  <div class="keys" id="keys"></div>
- <div class="row"><button class="btn gold" id="hint">💡 تلميح (10)</button><button class="btn" id="clear">🗑️ مسح</button></div>
+ <div class="row"><button class="btn gold" id="hint">💡 تلميح (10)</button><button class="btn" id="skip">⏭️ تخطي (30)</button><button class="btn" id="ask">🤝 اسأل صديق</button><button class="btn" id="clear">🗑️ مسح</button></div>
 </div>
 <div id="home"><div class="sea">🚢</div><div class="ttl"><div class="trow"><i>خ</i><i>مّ</i><i>ن</i></div><div class="trow"><i>ال</i><i>ك</i><i>ل</i><i>م</i><i>ة</i></div></div><div class="plq">خمّن الكلمة</div><button class="btn go" id="play">ابدأ</button><div id="acct"><button class="gbtn" id="gb"><svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>تسجيل الدخول</span></button></div><div id="gm"></div><div class="reef">🪸🌿🐚</div></div>
 <div id="prof"><div id="pbox"><button id="px" aria-label="إغلاق">✖</button><h2>الملف الشخصي</h2><div class="av big" id="pav"></div><div id="avs"></div><input id="pin" maxlength="16" placeholder="اسمك"><button class="btn gold" id="psv">حفظ</button><button class="btn red" id="plo">تسجيل الخروج</button><div id="pm"></div></div></div>
 <div id="share"><div id="shbox"><button id="shx" aria-label="إغلاق">✖</button><h2>انشر اللعبة</h2><p>وتحدَّ أصحابك!</p><div class="logo"><i>خ</i><i>م</i><i>ن</i><i>؟</i></div><div class="soc"><a id="sfb" class="c fb" target="_blank" rel="noopener">f</a><a id="swa" class="c wa" target="_blank" rel="noopener">💬</a><a id="sig" class="c ig" href="https://www.instagram.com/" target="_blank" rel="noopener">📷</a><button id="smo" class="c mo">⋯</button></div><div id="shm"></div></div></div>
-<div id="side"><div id="panel"><button class="gear2" id="gc" aria-label="إغلاق">⚙️</button><h2 id="sth" style="margin:0 0 4px;text-align:center">الإعدادات</h2><div id="pf" style="display:none"><div class="av" id="avm"></div><b id="pn"></b></div><button class="btn" id="snd"></button><button class="btn" id="shr">📤 أرسل اللعبة</button><a class="btn" id="ig" style="display:none" target="_blank" rel="noopener">📷 تابعنا</a><button class="btn gold" id="hm">🏠 الرئيسية</button><div id="ver">الإصدار 2.3</div></div></div>
+<div id="side"><div id="panel"><button class="gear2" id="gc" aria-label="إغلاق">⚙️</button><h2 id="sth" style="margin:0 0 4px;text-align:center">الإعدادات</h2><div id="pf" style="display:none"><div class="av" id="avm"></div><b id="pn"></b></div><button class="btn" id="snd"></button><button class="btn" id="shr">📤 أرسل اللعبة</button><a class="btn" id="ig" style="display:none" target="_blank" rel="noopener">📷 تابعنا</a><button class="btn gold" id="hm">🏠 الرئيسية</button><div id="ver">الإصدار 2.4</div></div></div>
 <div id="map"><button class="gear" id="set" aria-label="الإعدادات">⚙️</button><div class="pill" style="font-size:20px">خريطة المراحل</div><div id="grid"></div><div class="row"><button class="btn" id="mh">🏠</button><button class="btn" id="close">إغلاق</button></div></div>
 <script>
 const L=[["🌞", ["ضوء", "حرارة", "صيف"]], ["🌙", ["ليل", "نجوم", "ظلام"]], ["🍎", ["فاكهة", "شجرة", "عصير"]], ["🚗", ["طريق", "سائق", "محرك"]], ["✈️", ["سماء", "مطار", "سفر"]], ["🏠", ["باب", "سقف", "عائلة"]], ["📚", ["قراءة", "مدرسة", "قلم"]], ["🌹", ["عطر", "حديقة", "حب"]], ["🐟", ["بحر", "شبكة", "ماء"]], ["🦁", ["غابة", "ملك", "زئير"]], ["🐘", ["خرطوم", "ضخم", "عاج"]], ["⏰", ["وقت", "منبه", "نوم"]], ["🐄", ["حليب", "مزرعة", "عجل"]], ["🐔", ["بيض", "ريش", "ديك"]], ["🐝", ["عسل", "خلية", "لسع"]], ["🌧️", ["مطر", "غيوم", "شتاء"]], ["❄️", ["ثلج", "برد", "جليد"]], ["🔥", ["نار", "حرق", "دخان"]], ["🌳", ["ظل", "غصن", "جذع"]], ["🏖️", ["رمل", "شاطئ", "موج"]], ["⚽", ["كرة", "لاعب", "هدف"]], ["🎂", ["حلوى", "شمعة", "عيد"]], ["🦷", ["سن", "طبيب", "تنظيف"]], ["👁️", ["نظر", "رمش", "عدسة"]], ["🎵", ["لحن", "غناء", "نغمة"]], ["🔑", ["قفل", "باب", "خزنة"]], ["💡", ["نور", "كهرباء", "مصباح"]], ["📱", ["اتصال", "شاشة", "رسالة"]], ["🚲", ["عجلة", "سباق", "دواسة"]], ["🚢", ["ميناء", "بحار", "قبطان"]], ["🚂", ["محطة", "ركاب", "سكة"]], ["🍕", ["عجين", "جبن", "مطعم"]], ["☕", ["قهوة", "فنجان", "بخار"]], ["🍉", ["أحمر", "بذور", "عطش"]], ["🎈", ["هواء", "حفلة", "خيط"]], ["🏰", ["ملك", "قلعة", "فارس"]], ["🐢", ["بطيء", "درع", "بيضة"]], ["🦅", ["جناح", "صقر", "قمة"]], ["🌋", ["جبل", "رماد", "انفجار"]], ["🌈", ["ألوان", "قوس", "سبعة"]], ["🧲", ["جذب", "حديد", "قطب"]], ["🔭", ["فلك", "كواكب", "مرصد"]], ["🎹", ["عزف", "مفاتيح", "موسيقى"]], ["🧭", ["اتجاه", "شمال", "خريطة"]], ["🏔️", ["تسلق", "ثلوج", "صخور"]], ["🛰️", ["فضاء", "مدار", "أرض"]], ["🧪", ["مختبر", "تجربة", "كيمياء"]], ["⚖️", ["عدالة", "قاضي", "محكمة"]], ["🏆", ["فوز", "بطولة", "كأس"]], ["🎓", ["تخرج", "جامعة", "شهادة"]], ["🍇", ["عصير", "زبيب", "عنقود"]], ["🍊", ["قشر", "فيتامين", "حامض"]], ["🥕", ["أرنب", "خضار", "برتقالي"]], ["🥖", ["مخبز", "طحين", "خميرة"]], ["🥚", ["قشرة", "فطور", "دجاجة"]], ["🍫", ["كاكاو", "حلوى", "بني"]], ["🍦", ["بارد", "قمع", "مثلجات"]], ["🍔", ["شطيرة", "وجبة", "سريعة"]], ["🍞", ["فرن", "قمح", "رغيف"]], ["🥗", ["خس", "طماطم", "خيار"]], ["🐒", ["موز", "غصن", "ذيل"]], ["🐇", ["قفز", "أذن", "جزر"]], ["🐺", ["عواء", "قطيع", "ناب"]], ["🦊", ["مكر", "ذيل", "حيلة"]], ["🐻", ["سبات", "مخلب", "كهف"]], ["🐼", ["خيزران", "صين", "أبيض"]], ["🐧", ["قطب", "جليد", "سباحة"]], ["🐬", ["ذكي", "محيط", "قفز"]], ["🐙", ["أذرع", "حبر", "قاع"]], ["🦀", ["كماشة", "صدفة", "جانبي"]], ["🦋", ["أجنحة", "زهرة", "رحيق"]], ["🕷️", ["خيوط", "أرجل", "فريسة"]], ["🐍", ["سم", "زحف", "لدغ"]], ["🦒", ["رقبة", "طويل", "سافانا"]], ["🦉", ["حكمة", "سهر", "عيون"]], ["🌻", ["أصفر", "حقل", "زيت"]], ["🌵", ["صحراء", "شوك", "جاف"]], ["🍄", ["قبعة", "غابة", "سام"]], ["🌊", ["أمواج", "أزرق", "عميق"]], ["🏝️", ["نخلة", "رمال", "عطلة"]], ["🌅", ["شروق", "أفق", "فجر"]], ["⛈️", ["رعد", "برق", "عاصفة"]], ["🌪️", ["إعصار", "دوامة", "رياح"]], ["🧊", ["مكعب", "تجمد", "ثلاجة"]], ["⛺", ["تخييم", "رحلة", "جبل"]], ["🚁", ["إنقاذ", "هبوط", "مروحة"]], ["🚀", ["إطلاق", "رواد", "مركبة"]], ["🚒", ["إطفاء", "حريق", "سلم"]], ["🚑", ["إسعاف", "مريض", "سرعة"]], ["🚓", ["شرطة", "دورية", "قانون"]], ["🛵", ["دراجة", "خوذة", "توصيل"]], ["⛽", ["وقود", "بنزين", "مضخة"]], ["🏥", ["دكتور", "علاج", "طوارئ"]], ["🏫", ["تعليم", "معلم", "طلاب"]], ["🕌", ["صلاة", "مئذنة", "جامع"]], ["🏪", ["بيع", "شراء", "زبون"]], ["🏦", ["مال", "حساب", "صراف"]], ["🌉", ["نهر", "عبور", "معلق"]], ["🎡", ["دولاب", "ملاهي", "دوران"]], ["🥇", ["ذهب", "ميدالية", "بطل"]], ["⌚", ["ذكية", "توقيت", "سوار"]], ["💻", ["حاسوب", "لوحة", "برمجة"]], ["🖨️", ["ورق", "حبر", "نسخة"]], ["📷", ["تصوير", "عدسة", "لقطة"]], ["🎥", ["سينما", "فيلم", "مخرج"]], ["🎤", ["صوت", "مغني", "حفل"]], ["🎸", ["أوتار", "عزف", "فرقة"]], ["🥁", ["إيقاع", "عصا", "ضرب"]], ["🎨", ["فنان", "ريشة", "رسم"]], ["🧵", ["خياطة", "إبرة", "قماش"]], ["✂️", ["قصة", "حلاقة", "شعر"]], ["🔨", ["نجار", "مسمار", "بناء"]], ["🔧", ["مفتاح", "ورشة", "سباك"]], ["🧹", ["تنظيف", "غبار", "كنس"]], ["🛏️", ["وسادة", "غطاء", "غرفة"]], ["🚿", ["استحمام", "ماء", "صابون"]], ["🪞", ["انعكاس", "زجاج", "وجه"]], ["🔬", ["تكبير", "عينة", "جراثيم"]], ["🧬", ["جينات", "وراثة", "خلية"]], ["💊", ["دواء", "صيدلية", "شفاء"]], ["🩺", ["فحص", "نبض", "سماعة"]], ["🧠", ["تفكير", "ذكاء", "ذاكرة"]], ["❤️", ["شريان", "عاطفة", "شعور"]], ["🦴", ["هيكل", "كسر", "جمجمة"]], ["🌍", ["كوكب", "عالم", "قارات"]], ["🪐", ["زحل", "حلقات", "مجرة"]], ["☄️", ["نيزك", "صخرة", "اصطدام"]], ["🌠", ["شهاب", "أمنية", "سقوط"]], ["🌌", ["كون", "مجرات", "اتساع"]], ["⚡", ["طاقة", "صاعقة", "كهرباء"]], ["🔋", ["شحن", "هاتف", "سريع"]], ["🔌", ["مقبس", "تيار", "سلك"]], ["🔒", ["حماية", "مغلق", "سر"]], ["📜", ["لفافة", "تاريخ", "كتابة"]], ["🗿", ["حجر", "حضارة", "منحوت"]], ["🏛️", ["أعمدة", "إغريق", "معبد"]], ["⚓", ["سفينة", "رسو", "ثقيلة"]], ["🗼", ["برج", "باريس", "حديد"]], ["🕋", ["حجاج", "مكة", "طواف"]], ["🌴", ["تمر", "نخيل", "جريد"]], ["🐎", ["فرس", "صهيل", "سرج"]], ["🦚", ["ريش", "جمال", "استعراض"]], ["🦜", ["تقليد", "كلام", "ملون"]], ["🐋", ["محيط", "زعنفة", "نافورة"]], ["🦈", ["أنياب", "افتراس", "خطر"]], ["🐊", ["نهر", "مفترس", "زواحف"]], ["🦎", ["جدار", "زاحف", "ذيل"]], ["🐜", ["مستعمرة", "صغير", "سكر"]], ["🪔", ["رمضان", "شمعة", "نور"]], ["🎖️", ["وسام", "شرف", "جندي"]]];
-const AR="ابتثجحخدذرزسشصضطظعغفقكلمنهوي";
+const AR="ابتثجحخدذرزسشصضطظعغفقكلمنهويأةىءئؤ";
 let S={lv:0,coins:50,max:0};
 try{Object.assign(S,JSON.parse(localStorage.getItem("wg")||"{}"))}catch(e){}
 let U=null,db=null,auth=null,fbOK=true,pt,AK=false,TO=false;
@@ -143,7 +143,7 @@ function check(){
  if(slots.every((t,i)=>tiles[t]===ans[i])){
   busy=true;if(!sk)S.coins+=5;save();
   $("slots").classList.add("good");say(sk?"تم التخطي":"أحسنت! +5 🪙");beep(660);setTimeout(()=>beep(880),120);
-  setTimeout(()=>{if(wi<2){wi++}else{wi=0;S.coins+=10;S.lv=(S.lv+1)%L.length;if(S.lv>S.max)S.max=S.lv}save();load()},1000);
+  setTimeout(()=>{let end=false;if(wi<2){wi++}else{wi=0;S.coins+=10;if(S.lv+1>=L.length)end=true;S.lv=(S.lv+1)%L.length;if(S.lv>S.max)S.max=S.lv}save();load();if(end)say("🎉 أكملت كل المراحل! نبدأ من جديد")},1000);
  }else{
   busy=true;$("slots").classList.add("shake");say("إجابة خاطئة، حاول مجدداً");beep(180,.25);
   setTimeout(()=>{slots=slots.map((t,i)=>lock[i]?t:null);busy=false;say("");draw()},600);
@@ -158,6 +158,20 @@ $("hint").onclick=()=>{
  const t=tiles.findIndex((c,k)=>c===ans[i]&&!slots.some((s,j)=>s===k&&lock[j]));
  slots=slots.map(s=>s===t?null:s);slots[i]=t;lock[i]=true;S.coins-=10;save();draw();check();
 };
+$("skip").onclick=()=>{
+ if(busy)return;
+ if(S.coins<30){say("التخطي يكلف 30 عملة");return}
+ const u=new Set();
+ slots=ans.map(ch=>{const t=tiles.findIndex((c,k)=>c===ch&&!u.has(k));u.add(t);return t});
+ lock=ans.map(()=>true);sk=true;S.coins-=30;save();draw();check();
+};
+function daily(){
+ const f=d=>d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),t=f(new Date());
+ if(S.dr===t)return;
+ S.st=S.dr===f(new Date(Date.now()-864e5))?(S.st||0)+1:1;
+ const b=10+Math.min(S.st,7)*5;
+ S.coins+=b;S.dr=t;save();draw();say("🎁 مكافأة يومية +"+b+" 🪙 · اليوم "+S.st);
+}
 function openMap(){
  $("map").classList.add("on");
  const g=$("grid"),n=L.length,H=86,W=g.clientWidth||340,T=n*H+70;
@@ -241,12 +255,21 @@ $("sfb").href="https://www.facebook.com/sharer/sharer.php?u="+encodeURIComponent
 $("swa").href="https://wa.me/?text="+encodeURIComponent(TXT+" "+SHARE);
 $("sig").onclick=async()=>{sm((await cp())?"تم نسخ الرابط، الصقه في إنستغرام":SHARE)};
 $("smo").onclick=async()=>{try{await navigator.share({title:"خمّن الكلمة بالصورة",text:TXT,url:SHARE});return}catch(e){if(e&&e.name==="AbortError")return}sm((await cp())?"تم نسخ الرابط":SHARE)};
+$("ask").onclick=()=>{window.open("https://wa.me/?text="+encodeURIComponent("ساعدني! أي كلمة من "+ans.length+" حروف تناسب "+L[S.lv][0]+" ؟ 🤔 "+SHARE),"_blank")};
 if(IG){const a=$("ig");a.style.display="block";a.href="https://instagram.com/"+IG}
 $("hm").onclick=()=>{$("side").classList.remove("on");$("home").classList.remove("off")};
-if(S.lv>S.max)S.max=S.lv;load();initFB();
+if(S.lv>S.max)S.max=S.lv;load();daily();initFB();
 $("play").onclick=()=>{$("home").classList.add("off");beep(520);openMap()};
 $("mh").onclick=()=>{$("map").classList.remove("on");$("home").classList.remove("off")};
-if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+if("serviceWorker" in navigator){
+ const had=!!navigator.serviceWorker.controller;let rl=false;
+ navigator.serviceWorker.addEventListener("controllerchange",()=>{if(!had||rl)return;rl=true;const go=()=>{busy?setTimeout(go,1500):location.reload()};go()});
+ addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{
+  const chk=()=>r.update().catch(()=>{});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)chk()});
+  setInterval(chk,3600000);
+ }).catch(()=>{}));
+}
 </script>
 </body>
 </html>
